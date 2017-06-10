@@ -1,0 +1,27 @@
+<h2>
+    Genres
+</h2>
+<div class="genresAll" *ngIf="genresList">
+    <table>
+        <tbody>
+            <tr *ngFor="let genres of genresList">
+                <td>
+                    <div class="genresTitle">{{genres.name}}</div>
+                </td>
+                <td>
+                    <button (click)="edit(genres)"> Edit </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="addgenres">
+    <button (click)="add()">Add New Genres</button>
+</div>
+<div class="paging" >
+    <button (click)="getGenres()">First</button>
+    <button (click)="previousPage()">Previous</button>
+    <button *ngFor="let page of Pages" (click)="gotoPage(page)">{{page}}</button>
+    <button (click)="nextPage()">Next</button>
+    <button (click)="gotoPage(totalPages)">Last</button>
+</div>

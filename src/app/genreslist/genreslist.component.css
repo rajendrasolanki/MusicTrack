@@ -1,0 +1,15 @@
+h2{
+    color: #ffffff;
+}
+.genresAll table{
+    margin-top: 2%;
+    width: 100%;
+    border: 1px solid #cccccc;    
+}
+.genresTitle{
+    text-align: left;
+    float: left;
+}
+.paging{
+    
+}

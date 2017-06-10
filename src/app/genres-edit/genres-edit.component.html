@@ -1,0 +1,11 @@
+<h2>
+    Edit
+</h2>
+<form [formGroup]="editForm" *ngIf="genres" novalidate>
+    <label> Name : </label>
+    <input formControlName="name" required /><br/>
+    <button type="submit" (click)="saveData()"> Save </button>
+</form>
+<div *ngIf="genres">
+    {{editForm.value | json}}
+</div>

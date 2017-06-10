@@ -1,0 +1,22 @@
+<h2>
+    Add
+</h2>
+<form [formGroup]="addForm" novalidate>
+    <label> Title : </label>
+    <input formControlName="title" /><br/>
+    <div formGroupName="genres">
+        <label> Genres : </label>
+        <select formControlName="id">
+            <option *ngFor="let genre of genres" [value]="genre.id">
+                {{genre.name}}
+            </option>
+            <option [value]=""></option>
+        </select>
+    </div>
+    <label> Rating : </label>
+    <input formControlName="rating"  /><br/>
+    <button type="submit" (click)="saveData()"> Save </button>
+</form>
+<div>
+    {{addForm.value | json}}
+</div>

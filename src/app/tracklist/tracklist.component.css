@@ -1,0 +1,77 @@
+h2{
+    color: #ffffff;
+}
+.search{
+    display: inline;
+}
+.search input{
+    width: 79%;
+    padding: 1%;
+}
+.search button{
+    width: 18%;
+    overflow: hidden;
+    padding-top: 1.3%;
+    padding-bottom: 1.4%;
+    margin-left: -0.8%;
+    background-color: #9898ce;
+    border: 0px;
+    
+}
+.trackAll table{
+    margin-top: 2%;
+    width: 100%;
+    border: 1px solid #cccccc;    
+}
+
+.trackAll table tbody tr{
+    border: 1px solid #cccccc;    
+}
+.trackTitle{
+    text-align: left;
+    float: left;
+}
+.trackAll button{
+    width: 100%;
+    overflow: hidden;
+    padding-top: 6.3%;
+    padding-bottom: 6.4%;
+    margin-left: -0.8%;
+    background-color: #bcbcdc;
+    border: 0px;
+}
+.rating{
+    float: right;
+}
+.rating i{
+    font-style: normal;
+    color:#cccccc;
+}
+.rate{
+    color: #ffff66 !important;
+}
+.addtrack{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.addtrack button{
+    width: 100%;
+    overflow: hidden;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: #bcbcdc;
+    border: 0px;
+    color: white;
+}
+.paging{
+    margin-left: -3%;
+    margin-right: -3%;
+}
+.paging button{
+    width: 10%;
+    overflow: hidden;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #bcbcdc;
+    border: 0px;
+}

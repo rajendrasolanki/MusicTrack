@@ -1,0 +1,11 @@
+<h2>
+    Add
+</h2>
+<form [formGroup]="addForm" novalidate>
+    <label> Name : </label>
+    <input formControlName="name" required /><br/>
+    <button type="submit" (click)="saveData()"> Save </button>
+</form>
+<div>
+    {{addForm.value | json}}
+</div>

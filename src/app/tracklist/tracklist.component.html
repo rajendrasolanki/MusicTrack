@@ -1,0 +1,39 @@
+<h2>
+    Tracks
+</h2>
+<div class="search">
+    <input type="text" placeholder="Search" (keyup)="onKeyUp($event)" />
+    <button (click)="searchTrack()" >Search</button>
+</div>
+<div class="trackAll" *ngIf="trackList">
+    <table>
+        <tbody>
+            <tr *ngFor="let track of trackList;let i = index">
+                <td>
+                    <div class="trackTitle">{{track.title}}</div>
+                    <div class="trackTitle" *ngIf="track.genres[0]">[{{track.genres[0].name}}]</div>
+                    <div class="rating" (appOnCreate)="rating(track.rating,i)">
+                        <i [ngClass]="{'rate':isRate1[i]}">&#9733;</i>
+                        <i [ngClass]="{'rate':isRate2[i]}">&#9733;</i>
+                        <i [ngClass]="{'rate':isRate3[i]}">&#9733;</i>
+                        <i [ngClass]="{'rate':isRate4[i]}">&#9733;</i>
+                        <i [ngClass]="{'rate':isRate5[i]}">&#9733;</i>
+                    </div>
+                </td>
+                <td>
+                    <button (click)="edit(track)"> Edit </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="addtrack">
+    <button (click)="add()">Add New Track</button>
+</div>
+<div class="paging" >
+    <button (click)="getTrack()">First</button>
+    <button (click)="previousPage()">Prev</button>
+    <button *ngFor="let page of Pages" (click)="gotoPage(page)">{{page}}</button>
+    <button (click)="nextPage()">Next</button>
+    <button (click)="gotoPage(totalPages)">Last</button>
+</div>

@@ -1,3 +1,14 @@
-<h1>
-  {{title}}
-</h1>
+<header>
+    <h1>
+        {{title}}
+    </h1>
+</header>
+<section>
+    <div class="view">
+        <button (click)="nav('track')" [ngClass]="{'active': tabActive}">Track</button>
+        <button (click)="nav('genres')" [ngClass]="{'active': !tabActive}">Genres</button>
+        <router-outlet>
+
+        </router-outlet>
+    </div>
+</section>
