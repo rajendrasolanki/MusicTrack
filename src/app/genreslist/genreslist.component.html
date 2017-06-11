@@ -20,7 +20,7 @@
 </div>
 <div class="paging" >
     <button (click)="getGenres()">First</button>
-    <button (click)="previousPage()">Previous</button>
+    <button (click)="previousPage()">Prev</button>
     <button *ngFor="let page of Pages" (click)="gotoPage(page)">{{page}}</button>
     <button (click)="nextPage()">Next</button>
     <button (click)="gotoPage(totalPages)">Last</button>

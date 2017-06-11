@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AddTrackService} from '../service/add-track/add-track.service';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -17,8 +17,8 @@ export class TrackAddComponent implements OnInit {
   ngOnInit() {
       this.getGenres();
       this.addForm = this.fb.group({
-          title:'',
-          rating:'',
+          title: ['', Validators.required],
+          rating: ['', [Validators.required, Validators.pattern('[0-9]{1}\.[0-9]{1}')]],
           genres: this.fb.group(
           {
               id:''
@@ -33,6 +33,7 @@ export class TrackAddComponent implements OnInit {
       );
   }
   saveData(){
+      if (this.addForm.status=='VALID'){
       if (this.addForm.value.genres.id == "")
           this.addForm.value.genres =[];
       else
@@ -43,6 +44,7 @@ export class TrackAddComponent implements OnInit {
           console.log(response);
           this.router.navigate(['tracklist']);
       });
+  }
   }
 
 }

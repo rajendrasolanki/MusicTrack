@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router, ActivatedRoute} from '@angular/router';
 import {EditGenresService} from '../service/edit-genres/edit-genres.service';
 
@@ -25,16 +25,18 @@ export class GenresEditComponent implements OnInit {
           this.genres = response;
                   this.editForm = this.fb.group({
                         id: [this.genres.id],
-                      name: [this.genres.name]
+                        name: [this.genres.name, Validators.required]
                 });
   });
   }
   saveData(){
+      if (this.editForm.status=='VALID'){
       this.edit.saveGenres(this.editForm.value).subscribe(
           response =>{
               console.log(response);
               this.route.navigate(['genreslist']);
       });
+  }
   }
 
 }

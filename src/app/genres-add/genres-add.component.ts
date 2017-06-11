@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AddGenresService} from '../service/add-genres/add-genres.service';
 
@@ -17,15 +17,17 @@ export class GenresAddComponent implements OnInit {
 
   ngOnInit() {
       this.addForm = this.fb.group({
-          name:''
+          name: ['', Validators.required]
       });   
   }
   saveData(){
+      if (this.addForm.status=='VALID'){
       this.add.saveGenres(this.addForm.value).subscribe(
           response =>{
               console.log(response);
               this.route.navigate(['genreslist']);
       });
+  }
   }
 
 }

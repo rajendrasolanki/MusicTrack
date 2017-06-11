@@ -2,21 +2,50 @@
     Add
 </h2>
 <form [formGroup]="addForm" novalidate>
-    <label> Title : </label>
-    <input formControlName="title" /><br/>
-    <div formGroupName="genres">
-        <label> Genres : </label>
-        <select formControlName="id">
-            <option *ngFor="let genre of genres" [value]="genre.id">
-                {{genre.name}}
-            </option>
-            <option [value]=""></option>
-        </select>
-    </div>
-    <label> Rating : </label>
-    <input formControlName="rating"  /><br/>
-    <button type="submit" (click)="saveData()"> Save </button>
+    <table>
+        <tr>
+            <td>
+                <label> Title : </label>
+            </td>
+            <td>
+                <input formControlName="title" />
+            </td>
+        </tr>
+        <tr [hidden]="addForm.controls['title'].valid">
+            <td colspan="2">
+                <span>Title must required</span>
+            </td>
+        </tr>
+        <tr formGroupName="genres">
+            <td>
+                <label> Genres : </label>
+            </td>
+            <td>
+                <select formControlName="id">
+                    <option *ngFor="let genre of genres" [value]="genre.id">
+                        {{genre.name}}
+                    </option>
+                    <option [value]=""></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label> Rating : </label>
+            </td>
+            <td>
+                <input formControlName="rating"  />
+            </td>
+        </tr>
+        <tr [hidden]="addForm.controls['rating'].valid">
+            <td colspan="2">
+                <span>Rating must required in between (0.0 - 9.9)</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" (click)="saveData()"> Save </button>
+            </td>
+        </tr>
+    </table>    
 </form>
-<div>
-    {{addForm.value | json}}
-</div>

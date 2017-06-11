@@ -34,18 +34,18 @@ export class TrackEditComponent implements OnInit {
                     genres: this.fb.group({
                         id: ''
                     }),
-                    rating: [this.track.rating]
+                    rating: [this.track.rating, [Validators.required, Validators.pattern('[0-9]{1}\.[0-9]{1}')]]
                 });
               }
           else
             {
                 this.editForm = this.fb.group({
                         id: [this.track.id],
-                      title: [this.track.title],
+                      title: [this.track.title, Validators.required],
                     genres: this.fb.group({
                         id: [this.track.genres[0].id]
                     }),
-                    rating:[this.track.rating]
+                    rating:[this.track.rating, [Validators.required, Validators.pattern('[0-9]{1}\.[0-9]{1}')]]
                 });
             }
       }
@@ -59,6 +59,7 @@ export class TrackEditComponent implements OnInit {
       );
   }
   saveData(){
+      if (this.editForm.status=='VALID'){
       if(this.editForm.value.genres.id == "")
           this.editForm.value.genres =[];
       else
@@ -68,6 +69,7 @@ export class TrackEditComponent implements OnInit {
               console.log(response);
               this.route.navigate(['tracklist']);
       });
+  }
   }
 
 }

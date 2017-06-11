@@ -18,7 +18,7 @@ export class TracklistComponent implements OnInit {
     private isRate5=[];
     private Pages;
     private Url='http://104.197.128.152:8000/v1/tracks';
-    public currentPage;
+    static currentPage;
     private nextPageUrl;
     private previousPageUrl;
     private totalPages;
@@ -31,16 +31,22 @@ export class TracklistComponent implements OnInit {
       this.getTrack();
    }
   getTrack(){
-      this.allTracks.getAllTrack(this.Url).subscribe(
-      response =>{
-          this.trackList = response.results;
-          this.nextPageUrl = response.next;
-          this.previousPageUrl = response.previous;
-          this.totalPages = parseInt(( (response.count%20) == 0?(response.count/20) :(response.count/20)+1 )+"");
-          this.currentPage=1;
-          this.pageNo();
-      }
-      );
+      if (TracklistComponent.currentPage === undefined)
+            {
+        this.allTracks.getAllTrack(this.Url).subscribe(
+        response =>{
+            this.trackList = response.results;
+            this.nextPageUrl = response.next;
+            this.previousPageUrl = response.previous;
+            this.totalPages = parseInt(( (response.count%20) == 0?(response.count/20) :(response.count/20)+1 )+"");
+            TracklistComponent.currentPage=1;
+            this.pageNo();
+        }
+        );
+    }
+    else{
+          this.gotoPage(TracklistComponent.currentPage);
+    }
   }
   gotoPage(pageNo){
       this.allTracks.getAllTrack(this.Url + "?page=" + pageNo).subscribe(
@@ -48,7 +54,8 @@ export class TracklistComponent implements OnInit {
           this.trackList = response.results;
           this.nextPageUrl = response.next;
           this.previousPageUrl = response.previous;
-          this.currentPage = pageNo;
+          this.totalPages = parseInt(( (response.count%20) == 0?(response.count/20) :(response.count/20)+1 )+"");
+          TracklistComponent.currentPage = pageNo;
           this.pageNo();
           
       }
@@ -61,7 +68,7 @@ export class TracklistComponent implements OnInit {
           this.trackList = response.results;
           this.nextPageUrl = response.next;
           this.previousPageUrl = response.previous;
-          this.currentPage+=1;
+          TracklistComponent.currentPage+=1;
           this.pageNo();
       }
       );
@@ -74,24 +81,24 @@ export class TracklistComponent implements OnInit {
           this.trackList = response.results;
           this.nextPageUrl = response.next;
           this.previousPageUrl = response.previous;
-          this.currentPage-=1;
+          TracklistComponent.currentPage-=1;
           this.pageNo();
       }
       );
     }
   }
   pageNo(){
-      if (this.currentPage >= 1 && this.currentPage <3)
+      if (TracklistComponent.currentPage >= 1 && TracklistComponent.currentPage <3)
       {
           this.Pages=[1,2,3,4,5];
       }
-      else if (this.currentPage > this.totalPages - 2 && this.currentPage <= this.totalPages)
+      else if (TracklistComponent.currentPage > this.totalPages - 2 && TracklistComponent.currentPage <= this.totalPages)
       {
           this.Pages = [this.totalPages - 4, this.totalPages - 3, this.totalPages - 2, this.totalPages - 1, this.totalPages];
       }
       else
       {
-          this.Pages = [this.currentPage-2,this.currentPage-1,this.currentPage,this.currentPage+1,this.currentPage+2];
+          this.Pages = [TracklistComponent.currentPage-2,TracklistComponent.currentPage-1,TracklistComponent.currentPage,TracklistComponent.currentPage+1,TracklistComponent.currentPage+2];
       }
   }
   edit(track){

@@ -2,24 +2,51 @@
     Edit
 </h2>
 <form *ngIf="track" [formGroup]="editForm" (ngSubmit)="saveData()" novalidate>
-    <label> Title : </label>
-    <input formControlName="title"/><br/>
-    <p [hidden]="editForm.controls['title'].valid">Title must required</p>
-    {{editForm.get('title').status}}
-    <div formGroupName="genres">
-        <label> Genres : </label>
-        <select formControlName="id">
-            <option *ngIf="track.genres.length" [value]="track.genres[0].id">{{track.genres[0].name}}</option>
-            <option *ngFor="let genre of genres" [value]="genre.id">
-                {{genre.name}}
-            </option>
-            <option [value]=""></option>
-        </select>
-    </div>
-    <label> Rating : </label>
-    <input formControlName="rating" /><br/>
-    <button type="submit"> Save </button>
+    <table>
+        <tr>
+            <td>
+                <label> Title : </label>
+            </td>
+            <td>
+                <input formControlName="title"/>
+            </td>
+        </tr>
+        <tr [hidden]="editForm.controls['title'].valid">
+            <td colspan="2">
+                <span>Title must required</span>
+            </td>
+        </tr>
+        <tr formGroupName="genres">
+            <td>
+                <label> Genres : </label>
+            </td>
+            <td>
+                <select formControlName="id">
+                    <option *ngIf="track.genres.length" [value]="track.genres[0].id">{{track.genres[0].name}}</option>
+                    <option *ngFor="let genre of genres" [value]="genre.id">
+                        {{genre.name}}
+                    </option>
+                    <option [value]=""></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label> Rating : </label>
+            </td>
+            <td>
+                <input formControlName="rating" />
+            </td>
+        </tr>
+        <tr [hidden]="editForm.controls['rating'].valid">
+            <td colspan="2">
+                <span>Rating must required in between (0.0 - 9.9)</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit"> Save </button>
+            </td>
+        </tr>
+    </table>
 </form>
-<div *ngIf="track">
-    {{editForm.value | json}}
-</div>

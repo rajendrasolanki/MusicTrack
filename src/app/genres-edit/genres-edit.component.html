@@ -2,10 +2,20 @@
     Edit
 </h2>
 <form [formGroup]="editForm" *ngIf="genres" novalidate>
-    <label> Name : </label>
-    <input formControlName="name" required /><br/>
-    <button type="submit" (click)="saveData()"> Save </button>
+    <table>
+        <tr>
+            <td>
+                <label> Name : </label>
+            </td>
+            <td>
+                <input formControlName="name" required />
+                <span [hidden]="editForm.controls['name'].valid">Name is must required</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" (click)="saveData()"> Save </button>
+            </td>
+        </tr>
+    </table>
 </form>
-<div *ngIf="genres">
-    {{editForm.value | json}}
-</div>
